@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="src/TVLive/Assets/whale-tv.png" width="160" alt="鲸鱼电视图标">
+</p>
+
 # 鲸鱼电视
 
 Windows 桌面版：WPF + WPF UI，LibVLC 直连播放，WebView2 官方页面取流 / 官网播放。深灰界面、蓝色焦点、频道抽屉、收藏、全屏、设置与脱敏诊断。版本 0.1.6。
