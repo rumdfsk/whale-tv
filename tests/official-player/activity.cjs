@@ -1,0 +1,21 @@
+const {readFileSync}=require('node:fs');
+const {resolve}=require('node:path');
+const vm=require('node:vm');
+const assert=require('node:assert/strict');
+const script=readFileSync(resolve(__dirname,'../../src/TVLive/Web/activity.js'),'utf8');
+const listeners=new Map(),messages=[];
+let now=0;
+const context=vm.createContext({window:{chrome:{webview:{postMessage:m=>messages.push(m)}}},performance:{now:()=>now},document:{addEventListener:(name,handler)=>{assert.equal(listeners.has(name),false);listeners.set(name,handler)}}});
+vm.runInContext(script,context);vm.runInContext(script,context);
+assert.equal(listeners.size,6);
+function send(type,isTrusted=true){listeners.get(type)({type,isTrusted})}
+send('pointermove');assert.equal(messages.length,1);
+now=50;send('pointermove');assert.equal(messages.length,1);
+now=100;send('pointermove');assert.equal(messages.length,2);
+for(const type of ['pointerdown','pointerup','keydown','keyup','wheel'])send(type);
+assert.equal(messages.length,7);
+send('keydown',false);send('pointermove',false);assert.equal(messages.length,7);
+assert(messages.every(m=>m.type==='tvlive-activity'));
+console.log('PASS activity bridge is idempotent and independent of video adapter');
+console.log('PASS pointer movement throttled; keys, release and clicks wake immediately');
+console.log('PASS synthetic website events cannot continually reset the hide countdown');

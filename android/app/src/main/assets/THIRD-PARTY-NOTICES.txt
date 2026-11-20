@@ -1,0 +1,8 @@
+Whale TV Android 0.1.0 uses AndroidX Media3 and AndroidX libraries (The Android Open Source Project), Guava (Google), and Kotlin standard libraries (JetBrains).
+These projects are licensed under the Apache License, Version 2.0. A copy is included in LICENSE-2.0.txt.
+https://github.com/androidx/media
+https://android.googlesource.com/platform/frameworks/support/
+https://github.com/google/guava
+https://github.com/JetBrains/kotlin
+
+Official television webpages and broadcasts are provided by their respective operators. This application does not claim ownership of those pages or broadcasts.

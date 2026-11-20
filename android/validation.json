@@ -1,0 +1,17 @@
+{
+  "apk": "WhaleTV-Android-0.1.0-test.apk",
+  "bytes": 5721090,
+  "sha256": "f7e6499ea323af7a30586bc2bd63b714bf5c7298b1c90187c5d832b28377d5a2",
+  "unitTests": {
+    "name": "cn.whaletv.mobile.ChannelTest",
+    "tests": "2",
+    "skipped": "0",
+    "failures": "0",
+    "errors": "0",
+    "timestamp": "2026-10-24T13:36:03",
+    "hostname": "shaundeMac-mini.local",
+    "time": "0.002"
+  },
+  "lint": "Passed, 0 errors, 5 warnings (dependency updates, portrait exit, backup rules)",
+  "deviceTesting": "No Android device connected; actual playback and UI awaiting phone validation"
+}

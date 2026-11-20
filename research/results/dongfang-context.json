@@ -1,0 +1,53 @@
+[
+  {
+    "channel": "东方卫视",
+    "tested_at": "2026-10-24T11:12:26.158968+00:00",
+    "requested_media_seconds": 20.0,
+    "headers_used": [
+      "Referer",
+      "Origin",
+      "User-Agent"
+    ],
+    "decoded_frames": {
+      "video": 501,
+      "audio": 940
+    },
+    "manifest_status": 200,
+    "cors_origin": "*",
+    "manifest_is_hls": true,
+    "manifest_has_key_tag": false,
+    "segment_durations": [
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0
+    ],
+    "streams": [
+      {
+        "type": "video",
+        "codec": "h264"
+      },
+      {
+        "type": "audio",
+        "codec": "aac"
+      }
+    ],
+    "first_frame_seconds": {
+      "audio": 1.143,
+      "video": 1.154
+    },
+    "resolution": [
+      1920,
+      1080
+    ],
+    "media_span_seconds": {
+      "audio": 20.032,
+      "video": 20.0
+    },
+    "audio_peak_s16": 20858,
+    "audio_rms_s16": 1874.58,
+    "passed": true,
+    "wall_seconds": 2.302
+  }
+]

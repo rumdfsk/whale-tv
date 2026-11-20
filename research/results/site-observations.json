@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-24",
+  "scope": "Small-sample feasibility validation; not a complete Windows app",
+  "environment": {
+    "host": "macOS",
+    "browser": "Codex in-app Chromium",
+    "windows_tested": false,
+    "physical_speaker_listening_tested": false,
+    "direct_decoder": "PyAV/libav"
+  },
+  "channels": [
+    {
+      "name": "CCTV1",
+      "page": "https://www.yangshipin.cn/tv/home?pid=600001859",
+      "observed": {
+        "width": 1920,
+        "height": 1080,
+        "currentTime": 9.461597,
+        "paused": false,
+        "muted": false
+      },
+      "direct_stream": "Not established: observed video blob URL, no independently verified manifest through available resource inventory"
+    },
+    {
+      "name": "CCTV13",
+      "page": "https://www.yangshipin.cn/tv/home?pid=600001811",
+      "observed": {
+        "width": 1920,
+        "height": 1080,
+        "currentTime": 31.183976,
+        "paused": false,
+        "muted": false
+      },
+      "direct_stream": "Not established"
+    },
+    {
+      "name": "CCTV5",
+      "page": "https://www.yangshipin.cn/tv/home?pid=600001818",
+      "observed": {
+        "width": 1920,
+        "height": 1080,
+        "currentTime_start": 57.90994,
+        "currentTime_later": 79.038375,
+        "paused": false,
+        "muted": false
+      },
+      "direct_stream": "Not established"
+    },
+    {
+      "name": "湖南卫视",
+      "page": "https://www.yangshipin.cn/tv/home?pid=600002475",
+      "observed": {
+        "width": 1920,
+        "height": 1080,
+        "currentTime": 18.833714,
+        "paused": false,
+        "muted": false
+      },
+      "direct_stream": "Not established",
+      "note": "MGTV /live loaded another channel. In the tested 卫视台 category, only 金鹰卡通/国际频道/金鹰纪实 were listed; cannot count that as 湖南卫视."
+    },
+    {
+      "name": "浙江卫视",
+      "page": "https://www.cztv.com/liveTV",
+      "direct_stream": "Passed 20 and 90 media-second independent decode; official browser-generated signed HLS"
+    },
+    {
+      "name": "江苏卫视",
+      "page": "https://live.jstv.com/?id=9",
+      "direct_stream": "Passed 20 and 90 media-second independent decode with Referer",
+      "header_control": {
+        "plain": 403,
+        "only_Origin": 403,
+        "only_UserAgent_generic": 403,
+        "only_Referer": 200
+      }
+    },
+    {
+      "name": "东方卫视",
+      "page": "https://live.kankanews.com/huikan",
+      "direct_stream": "Passed 20 media-second independent decode with matching official-session headers",
+      "header_control": {
+        "plain": 403,
+        "only_Referer": 403,
+        "Referer_Origin_matchingUserAgent": 200,
+        "matching_UserAgent_only_manifest": 200
+      },
+      "note": "Do not infer that all three headers are independently required; no full ablation. Path says 4k but decoded resolution is 1920x1080."
+    }
+  ],
+  "limitations": [
+    "tv.cctv.com browser testing was blocked by the tool site-safety policy in the previous turn; no bypass was attempted. Yangshipin is a separately accessible official platform.",
+    "Yangshipin cold-load log included NotAllowedError for audible autoplay; subsequent selected channels were observed unmuted and playing after interaction.",
+    "Yangshipin includes a custom HLS/CMG/WASM player pipeline. Shared player code does not prove the sampled channel uses DRM.",
+    "Signed addresses were obtained from ordinary public official playback sessions. No signatures were generated, no DRM or paid access was bypassed.",
+    "Address reuse succeeded over the observed minutes; no exact expiration, overnight stability, new-IP reuse, fresh-profile or Windows behavior has been established.",
+    "Decode durations are media timestamp spans, not wall-clock listening durations. Startup timings are decoder/browser event timings on this network, not guaranteed product latency."
+  ],
+  "official_pages_closed_before": "2026-10-24T11:14:11.139330+00:00"
+}

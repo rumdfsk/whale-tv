@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>电视直播技术验证</title>
+<style>
+body{margin:0;background:#15191e;color:#f0f2f5;font:15px system-ui}main{max-width:1080px;margin:auto;padding:20px}button{padding:10px 15px;margin:4px;background:#293b4b;color:white;border:1px solid #667788;border-radius:5px;cursor:pointer}#stage{position:relative;background:black;width:100%;aspect-ratio:16/9}#stage:fullscreen{width:100vw;height:100vh}video{width:100%;height:100%;object-fit:contain}#badge{position:absolute;top:12px;left:12px;background:#000b;padding:8px;pointer-events:none}#status{white-space:pre-wrap;max-height:230px;overflow:auto;font:12px monospace}small{color:#bbc4cd}
+</style>
+<main><h1>直播技术验证 · 三频道样本</h1>
+<p>↑↓ / PageUp / PageDown 换台；数字 1、2、3 选台；F 全屏；Enter 开始有声播放。只验证，不是完整软件。</p>
+<div id="stage"><video id="video" playsinline></video><div id="badge">加载频道配置…</div></div>
+<p><button id="start">开始有声播放</button><button id="prev">上一台</button><button id="next">下一台</button><button id="fullscreen">全屏</button><button id="cycle">6 次连续换台测试</button><button id="save">保存测试结果</button><button id="stop">停止播放</button></p>
+<small>直接使用正常官网会话取得的临时 HLS 地址；本机转发保留必要请求头。初始有声自动播放失败会原样记录，不自动静音掩盖。</small>
+<pre id="status" aria-label="测试状态"></pre></main><script src="/hls.min.js"></script>
+<script>
+const video=document.getElementById('video'),stage=document.getElementById('stage'),badge=document.getElementById('badge'),statusBox=document.getElementById('status');
+let channels=[],index=0,hls=null,generation=0,current=null,events=[],runs=[],samples=[],timer=null,autoTimer=null,audioContext=null,analyser=null,audioValues=null;
+const startedAt=new Date().toISOString();
+function event(type,details={}){events.push({at:new Date().toISOString(),type,...details});if(events.length>2000)events.shift();render();}
+function render(){statusBox.textContent=JSON.stringify({channel:channels[index]?.name,current,fullscreen:!!document.fullscreenElement,muted:video.muted,paused:video.paused,ready:video.readyState,lastEvents:events.slice(-5)},null,2);}
+function audioProbe(){if(!audioContext){audioContext=new AudioContext();const source=audioContext.createMediaElementSource(video);analyser=audioContext.createAnalyser();analyser.fftSize=2048;source.connect(analyser);analyser.connect(audioContext.destination);audioValues=new Float32Array(analyser.fftSize);}audioContext.resume().catch(()=>{});}
+async function play(reason){try{await video.play();event('play-resolved',{reason});}catch(e){event('play-rejected',{reason,error:e.name});if(current)current.playError=e.name;}}
+function choose(next,reason){
+  index=(next+channels.length)%channels.length;generation++;const gen=generation;
+  if(hls){hls.destroy();hls=null;}video.pause();video.removeAttribute('src');video.load();video.muted=false;video.volume=.6;
+  current={generation:gen,channel:channels[index].name,reason,at:new Date().toISOString(),started:performance.now(),firstPlayingMs:null,fullscreenAtStart:!!document.fullscreenElement};runs.push(current);
+  badge.textContent=channels[index].name;event('switch',{generation:gen,channel:channels[index].name,reason});
+  hls=new Hls({enableWorker:true,maxBufferLength:12,backBufferLength:0});
+  hls.on(Hls.Events.ERROR,(_,data)=>{if(gen===generation)event('hls-error',{generation:gen,details:data.details,fatal:data.fatal});});
+  hls.on(Hls.Events.MANIFEST_PARSED,()=>{if(gen===generation)play('manifest');});
+  hls.loadSource(channels[index].source);hls.attachMedia(video);
+}
+function full(){if(document.fullscreenElement)document.exitFullscreen();else stage.requestFullscreen().catch(e=>event('fullscreen-rejected',{error:e.name}));}
+function interact(){audioProbe();video.muted=false;play('user');}
+video.addEventListener('playing',()=>{if(current&&current.firstPlayingMs===null){current.firstPlayingMs=Math.round(performance.now()-current.started);current.fullscreenAtPlaying=!!document.fullscreenElement;}event('playing',{generation,muted:video.muted,volume:video.volume});});
+for(const name of ['waiting','stalled','error','ended'])video.addEventListener(name,()=>event(name,{generation,error:video.error?.code}));
+document.addEventListener('fullscreenchange',()=>event('fullscreenchange',{fullscreen:!!document.fullscreenElement}));
+document.getElementById('start').onclick=interact;
+document.getElementById('prev').onclick=()=>{audioProbe();choose(index-1,'button-prev');};
+document.getElementById('next').onclick=()=>{audioProbe();choose(index+1,'button-next');};
+document.getElementById('fullscreen').onclick=full;
+document.getElementById('stop').onclick=()=>{clearInterval(autoTimer);if(hls)hls.destroy();video.pause();event('stopped');};
+document.addEventListener('keydown',e=>{if(e.repeat)return;if(['ArrowUp','ArrowDown','PageUp','PageDown','1','2','3','f','F','Enter'].includes(e.key))e.preventDefault();else return;
+ audioProbe();if(['ArrowUp','PageUp'].includes(e.key))choose(index-1,'key:'+e.key);else if(['ArrowDown','PageDown'].includes(e.key))choose(index+1,'key:'+e.key);else if(['1','2','3'].includes(e.key))choose(Number(e.key)-1,'key:'+e.key);else if(e.key==='Enter')interact();else full();});
+document.getElementById('cycle').onclick=()=>{audioProbe();clearInterval(autoTimer);let count=0;event('cycle-start');autoTimer=setInterval(()=>{choose(index+1,'cycle');count++;if(count===6){clearInterval(autoTimer);setTimeout(()=>event('cycle-complete'),10000);}},10000);};
+function report(){return {startedAt,savedAt:new Date().toISOString(),userAgent:navigator.userAgent,hlsVersion:Hls.version,runs,events,samples};}
+document.getElementById('save').onclick=async()=>{const response=await fetch('/api/results',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report())});event('report-saved',{ok:response.ok});};
+timer=setInterval(()=>{let rms=null;if(analyser){analyser.getFloatTimeDomainData(audioValues);rms=Math.sqrt(audioValues.reduce((a,x)=>a+x*x,0)/audioValues.length);}const q=video.getVideoPlaybackQuality();const sample={at:new Date().toISOString(),generation,channel:channels[index]?.name,time:video.currentTime,ready:video.readyState,paused:video.paused,muted:video.muted,volume:video.volume,fullscreen:!!document.fullscreenElement,width:video.videoWidth,height:video.videoHeight,frames:q.totalVideoFrames,dropped:q.droppedVideoFrames,audioRms:rms,audioContext:audioContext?.state};samples.push(sample);if(samples.length>1800)samples.shift();render();},1000);
+fetch('/api/channels').then(r=>r.json()).then(c=>{channels=c;choose(0,'initial-no-gesture');});
+</script></html>

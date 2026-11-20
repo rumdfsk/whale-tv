@@ -1,0 +1,49 @@
+[
+  {
+    "channel": "江苏卫视",
+    "tested_at": "2026-10-24T11:10:28.366406+00:00",
+    "requested_media_seconds": 90.0,
+    "headers_used": [
+      "Referer"
+    ],
+    "decoded_frames": {
+      "video": 2251,
+      "audio": 4222
+    },
+    "manifest_status": 200,
+    "cors_origin": "*",
+    "manifest_is_hls": true,
+    "manifest_has_key_tag": false,
+    "segment_durations": [
+      3.0,
+      3.0,
+      2.84
+    ],
+    "streams": [
+      {
+        "type": "video",
+        "codec": "h264"
+      },
+      {
+        "type": "audio",
+        "codec": "aac"
+      }
+    ],
+    "first_frame_seconds": {
+      "video": 0.408,
+      "audio": 0.41
+    },
+    "resolution": [
+      1920,
+      1080
+    ],
+    "media_span_seconds": {
+      "video": 90.0,
+      "audio": 90.048
+    },
+    "audio_peak_s16": 32767,
+    "audio_rms_s16": 4599.13,
+    "passed": true,
+    "wall_seconds": 81.804
+  }
+]

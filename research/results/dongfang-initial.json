@@ -1,0 +1,20 @@
+[
+  {
+    "channel": "东方卫视",
+    "tested_at": "2026-10-24T11:11:19.938525+00:00",
+    "requested_media_seconds": 20.0,
+    "headers_used": [],
+    "decoded_frames": {
+      "video": 0,
+      "audio": 0
+    },
+    "manifest_status": 403,
+    "cors_origin": "*",
+    "manifest_is_hls": false,
+    "manifest_has_key_tag": false,
+    "segment_durations": [],
+    "error_type": "HTTPError",
+    "passed": false,
+    "wall_seconds": 0.128
+  }
+]

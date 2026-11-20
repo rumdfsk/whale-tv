@@ -1,0 +1,209 @@
+{
+  "date": "2026-10-24",
+  "environment": "macOS + Chromium; Windows not tested",
+  "rounds": [
+    {
+      "file": "browser-two-channels.json",
+      "start": "2026-10-24T11:09:32.477Z",
+      "end": "2026-10-24T11:12:16.415Z",
+      "automatic_switches": 10,
+      "successful_automatic_switches": 10,
+      "switch_ms": {
+        "min": 206,
+        "median": 359.0,
+        "max": 655
+      },
+      "cycle_details": [
+        {
+          "generation": 2,
+          "channel": "江苏卫视",
+          "first_playing_ms": 333,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 3,
+          "channel": "浙江卫视",
+          "first_playing_ms": 363,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 4,
+          "channel": "江苏卫视",
+          "first_playing_ms": 355,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 5,
+          "channel": "浙江卫视",
+          "first_playing_ms": 513,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 6,
+          "channel": "江苏卫视",
+          "first_playing_ms": 252,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 7,
+          "channel": "浙江卫视",
+          "first_playing_ms": 655,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 8,
+          "channel": "江苏卫视",
+          "first_playing_ms": 270,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 9,
+          "channel": "浙江卫视",
+          "first_playing_ms": 624,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 10,
+          "channel": "江苏卫视",
+          "first_playing_ms": 605,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 11,
+          "channel": "浙江卫视",
+          "first_playing_ms": 206,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        }
+      ],
+      "errors": [
+        {
+          "at": "2026-10-24T11:09:32.544Z",
+          "type": "play-rejected",
+          "reason": "manifest",
+          "error": "NotAllowedError"
+        }
+      ],
+      "fullscreen_events": [
+        {
+          "at": "2026-10-24T11:09:37.904Z",
+          "type": "fullscreenchange",
+          "fullscreen": true
+        },
+        {
+          "at": "2026-10-24T11:12:14.094Z",
+          "type": "fullscreenchange",
+          "fullscreen": false
+        }
+      ]
+    },
+    {
+      "file": "browser-three-channels.json",
+      "start": "2026-10-24T11:12:45.001Z",
+      "end": "2026-10-24T11:14:27.344Z",
+      "automatic_switches": 6,
+      "successful_automatic_switches": 6,
+      "switch_ms": {
+        "min": 278,
+        "median": 445.0,
+        "max": 938
+      },
+      "cycle_details": [
+        {
+          "generation": 2,
+          "channel": "江苏卫视",
+          "first_playing_ms": 279,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 3,
+          "channel": "东方卫视",
+          "first_playing_ms": 938,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 4,
+          "channel": "浙江卫视",
+          "first_playing_ms": 519,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 5,
+          "channel": "江苏卫视",
+          "first_playing_ms": 278,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 6,
+          "channel": "东方卫视",
+          "first_playing_ms": 578,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        },
+        {
+          "generation": 7,
+          "channel": "浙江卫视",
+          "first_playing_ms": 371,
+          "fullscreen": true,
+          "has_audio_signal": true,
+          "muted_samples": 0
+        }
+      ],
+      "errors": [
+        {
+          "at": "2026-10-24T11:12:45.059Z",
+          "type": "play-rejected",
+          "reason": "manifest",
+          "error": "NotAllowedError"
+        }
+      ],
+      "fullscreen_events": [
+        {
+          "at": "2026-10-24T11:12:48.207Z",
+          "type": "fullscreenchange",
+          "fullscreen": true
+        },
+        {
+          "at": "2026-10-24T11:14:27.071Z",
+          "type": "fullscreenchange",
+          "fullscreen": false
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Initial audible autoplay rejected on both document loads; one user start enabled later autoplay.",
+    "Full-screen entered once per round. All 16 automatic transitions preserved full-screen.",
+    "Three separately settled keyboard switches passed; a 5-key burst ended on the requested third channel.",
+    "Audio measured electrically in decoded/renderer samples, not by physical speaker listening.",
+    "Native decoder media spans and browser startup timings are not product latency guarantees."
+  ]
+}

@@ -1,0 +1,97 @@
+[
+  {
+    "channel": "浙江卫视",
+    "tested_at": "2026-10-24T11:07:50.102050+00:00",
+    "requested_media_seconds": 20.0,
+    "headers_used": [],
+    "decoded_frames": {
+      "video": 501,
+      "audio": 864
+    },
+    "manifest_status": 200,
+    "cors_origin": "*",
+    "manifest_is_hls": true,
+    "manifest_has_key_tag": false,
+    "segment_durations": [
+      8.0,
+      8.0,
+      8.0,
+      8.0
+    ],
+    "streams": [
+      {
+        "type": "audio",
+        "codec": "aac"
+      },
+      {
+        "type": "video",
+        "codec": "h264"
+      }
+    ],
+    "first_frame_seconds": {
+      "audio": 0.268,
+      "video": 0.274
+    },
+    "resolution": [
+      1280,
+      720
+    ],
+    "media_span_seconds": {
+      "audio": 20.039,
+      "video": 20.0
+    },
+    "audio_peak_s16": 11714,
+    "audio_rms_s16": 1472.27,
+    "passed": true,
+    "wall_seconds": 0.997
+  },
+  {
+    "channel": "江苏卫视",
+    "tested_at": "2026-10-24T11:07:51.100192+00:00",
+    "requested_media_seconds": 20.0,
+    "headers_used": [
+      "Referer",
+      "Origin",
+      "User-Agent"
+    ],
+    "decoded_frames": {
+      "video": 502,
+      "audio": 939
+    },
+    "manifest_status": 200,
+    "cors_origin": "https://live.jstv.com",
+    "manifest_is_hls": true,
+    "manifest_has_key_tag": false,
+    "segment_durations": [
+      3.0,
+      3.0,
+      3.0
+    ],
+    "streams": [
+      {
+        "type": "video",
+        "codec": "h264"
+      },
+      {
+        "type": "audio",
+        "codec": "aac"
+      }
+    ],
+    "first_frame_seconds": {
+      "video": 0.397,
+      "audio": 0.403
+    },
+    "resolution": [
+      1920,
+      1080
+    ],
+    "media_span_seconds": {
+      "video": 20.04,
+      "audio": 20.011
+    },
+    "audio_peak_s16": 32767,
+    "audio_rms_s16": 4458.35,
+    "passed": true,
+    "wall_seconds": 12.556
+  }
+]

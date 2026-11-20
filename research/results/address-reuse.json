@@ -1,0 +1,74 @@
+[
+  {
+    "at": "2026-10-24T11:10:38.646023+00:00",
+    "sample": "zhejiang-original",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:10:38.698793+00:00",
+    "sample": "jiangsu-original",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:10:38.755228+00:00",
+    "sample": "jiangsu-new",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:11:08.899540+00:00",
+    "sample": "zhejiang-original",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:11:09.010402+00:00",
+    "sample": "jiangsu-original",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:11:09.068239+00:00",
+    "sample": "jiangsu-new",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:11:39.329259+00:00",
+    "sample": "zhejiang-original",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:11:39.410514+00:00",
+    "sample": "jiangsu-original",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:11:39.476503+00:00",
+    "sample": "jiangsu-new",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:12:09.533643+00:00",
+    "sample": "zhejiang-original",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:12:09.582634+00:00",
+    "sample": "jiangsu-original",
+    "status": 200,
+    "hls": true
+  },
+  {
+    "at": "2026-10-24T11:12:09.636321+00:00",
+    "sample": "jiangsu-new",
+    "status": 200,
+    "hls": true
+  }
+]
